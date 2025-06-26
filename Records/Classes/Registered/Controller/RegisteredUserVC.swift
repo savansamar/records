@@ -11,9 +11,10 @@ class RegisteredUserVC: UIViewController {
     @IBOutlet weak var userName: UITextField!
     @IBOutlet weak var userAge: UITextField!
     @IBOutlet weak var userDOB: UITextField!
+    @IBOutlet weak var galleryCollectionView: UICollectionView!
     @IBOutlet weak var userDepartment: UITextField!
 
-    @IBOutlet weak var galleryCollectionView: UICollectionView!
+    
     private let datePicker = UIDatePicker()
     private let departmentPicker = UIPickerView()
 
@@ -31,18 +32,16 @@ class RegisteredUserVC: UIViewController {
 extension RegisteredUserVC {
 
     func onViewDidLoad() {
+        
         if let layout = galleryCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.minimumLineSpacing = 8
             layout.minimumInteritemSpacing = 8
-            layout.sectionInset = .zero
+            layout.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+            layout.scrollDirection = .vertical
         }
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 120, height: 120)
-        galleryCollectionView.collectionViewLayout  = layout
         
         galleryCollectionView.delegate = self
         galleryCollectionView.dataSource = self
-        galleryCollectionView.register(GalleryCell.nib(), forCellWithReuseIdentifier: GalleryCell.indetifier)
         
         setupDOBField()
         setupDepartmentPicker()
@@ -133,8 +132,14 @@ extension RegisteredUserVC {
 
     func showImagePicker() {
         var config = PHPickerConfiguration()
-        config.selectionLimit = 5
-        config.filter = .images
+            config.selectionLimit = 5
+            config.filter = .images
+
+            let picker = PHPickerViewController(configuration: config)
+            picker.delegate = self
+            DispatchQueue.main.async {
+                self.present(picker, animated: true, completion: nil)
+            }
     }
 
     func onSubmit() {

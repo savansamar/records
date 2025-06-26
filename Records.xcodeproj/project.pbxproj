@@ -14,7 +14,6 @@
 		FB84352C2E0D265F00FE1DC1 /* Exceptions for "Records" folder in "Records" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Classes/Registered/Controller/Untitled.swift,
 				Info.plist,
 			);
 			target = FB8435192E0D265E00FE1DC1 /* Records */;

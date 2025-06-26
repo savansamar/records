@@ -13,7 +13,13 @@ class RegisteredUserVC: UIViewController {
     @IBOutlet weak var userDOB: UITextField!
     @IBOutlet weak var galleryCollectionView: UICollectionView!
     @IBOutlet weak var userDepartment: UITextField!
-
+    @IBOutlet weak var submitStyle: UIButton!
+    
+    
+    //MARK:"- Actions
+    @IBAction func onSubmit(_ sender: Any) {
+        onSubmit()
+    }
     
     private let datePicker = UIDatePicker()
     private let departmentPicker = UIPickerView()
@@ -49,6 +55,13 @@ extension RegisteredUserVC {
         [userName, userEmail, userDOB, userDepartment].forEach {
             $0?.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         }
+        submitStyle.isEnabled = false
+        submitStyle.alpha = 0.5
+        submitStyle.layer.cornerRadius = 8
+        submitStyle.clipsToBounds = true
+        
+        submitStyle.backgroundColor = UIColor(red: 255/255, green: 140/255, blue: 0/255, alpha: 1.0)
+        submitStyle.setTitleColor(.white, for: .normal) // White text
     }
 
   
@@ -95,12 +108,13 @@ extension RegisteredUserVC {
 
             let age = Calendar.current.dateComponents([.year], from: datePicker.date, to: Date()).year ?? 0
             userAge.text = "\(age)"
-
+            
         } else if userDepartment.isFirstResponder {
             let selectedRow = departmentPicker.selectedRow(inComponent: 0)
             userDepartment.text = viewModel.departments[selectedRow]
             textFieldDidChange(userDepartment)
         }
+
         view.endEditing(true)
     }
 
@@ -111,7 +125,8 @@ extension RegisteredUserVC {
             dob: userDOB.text ?? "",
             department: userDepartment.text ?? ""
         )
-
+        submitStyle.isEnabled = isValid
+        submitStyle.alpha = isValid ? 1.0 : 0.5
         
     }
 
@@ -123,10 +138,12 @@ extension RegisteredUserVC {
             userAge.text = "\(user.age)"
             userDepartment.text = user.department
             viewModel.userGalleryArray = user.gallery ?? []
-            viewModel.userGalleryArray.insert(UserGallery(url: "", showAdd: true, fileName: ""), at: 0)
+            viewModel.userGalleryArray.insert(UserGallery(url: "", showAdd: true,fileName: ""), at: 0)
             
-        } else {
-            viewModel.loadGalleryItems()
+            galleryCollectionView.reloadData()
+
+            submitStyle.isEnabled = true
+            submitStyle.alpha = 1.0
         }
     }
 
@@ -143,25 +160,27 @@ extension RegisteredUserVC {
     }
 
     func onSubmit() {
+        // Validate input fields
         guard
             let name = userName.text, !name.isEmpty,
             let email = userEmail.text, !email.isEmpty,
             let dobString = userDOB.text, !dobString.isEmpty,
             let department = userDepartment.text, !department.isEmpty
         else {
-            print("Form incomplete")
             return
         }
 
+        // Convert DOB string to date
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         guard let dobDate = formatter.date(from: dobString) else {
-            print("⚠️ Invalid DOB format")
             return
         }
 
         let age = viewModel.calculateAge(from: dobDate)
         let validGallery = viewModel.userGalleryArray.filter { !$0.url.isEmpty && !$0.showAdd }
+
+        // Create new User object
         let newUser = User(
             name: name,
             email: email,
@@ -171,13 +190,23 @@ extension RegisteredUserVC {
             gallery: validGallery
         )
 
-        if let index = viewModel.indexOfUser(matching: email) {
-            viewModel.updateUser(at: index, with: newUser)
+        if let existing = existingUser {
+            // Editing an existing user — match using original email
+            if let index = viewModel.indexOfUser(matching: existing.email) {
+                viewModel.updateUser(at: index, with: newUser)
+            } else {
+                // Fallback if user not found
+                viewModel.addUser(name: name, email: email, dob: dobString, age: age, department: department, gallery: validGallery)
+            }
         } else {
+            // Adding a new user
             viewModel.addUser(name: name, email: email, dob: dobString, age: age, department: department, gallery: validGallery)
         }
 
+        // Reset gallery for next screen
         viewModel.loadGalleryItems()
+        
+        // Go back
         navigationController?.popViewController(animated: true)
     }
 }

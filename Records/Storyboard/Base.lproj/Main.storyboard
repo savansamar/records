@@ -59,6 +59,9 @@
                                                             <color key="tintColor" systemColor="labelColor"/>
                                                             <state key="normal" title="Button"/>
                                                             <buttonConfiguration key="configuration" style="plain" image="gear" catalog="system"/>
+                                                            <connections>
+                                                                <action selector="onSelect:" destination="X5E-CA-0v9" eventType="touchUpInside" id="nm3-v2-TTL"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <constraints>
@@ -70,6 +73,10 @@
                                                         <constraint firstItem="dQB-St-61W" firstAttribute="top" secondItem="hZl-8k-inP" secondAttribute="bottom" constant="6" id="qG1-Rs-SnC"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="userEmail" destination="dQB-St-61W" id="LUt-0z-bSe"/>
+                                                    <outlet property="userName" destination="hZl-8k-inP" id="yLz-5h-u7F"/>
+                                                </connections>
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
@@ -112,6 +119,7 @@
                     <connections>
                         <outlet property="addBtn" destination="gj9-Iz-F30" id="EHl-8Z-bM3"/>
                         <outlet property="recordsTable" destination="gcN-s6-4aq" id="xW5-fV-Xr1"/>
+                        <outlet property="search" destination="Mws-iK-EAS" id="8He-fn-7QP"/>
                         <segue destination="3It-Iw-Ha1" kind="show" identifier="AddUser" id="Ga1-ge-pMZ"/>
                     </connections>
                 </viewController>
@@ -239,7 +247,7 @@
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" image="numbers.rectangle" catalog="system"/>
                                                     </button>
-                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Age of user" minimumFontSize="16" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="1bz-aC-eP5">
+                                                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Age of user" minimumFontSize="16" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="1bz-aC-eP5">
                                                         <rect key="frame" x="74.666666666666657" y="13.333333333333341" width="286.33333333333337" height="23.333333333333329"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <textInputTraits key="textInputTraits" textContentType="name"/>
@@ -272,7 +280,7 @@
                                                         <buttonConfiguration key="configuration" style="plain" image="building.columns" catalog="system"/>
                                                     </button>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Select Department" minimumFontSize="16" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="gmo-ra-FIM">
-                                                        <rect key="frame" x="73" y="13.333333333333314" width="288" height="23.333333333333329"/>
+                                                        <rect key="frame" x="73" y="13.333333333333313" width="288" height="23.333333333333329"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <textInputTraits key="textInputTraits" textContentType="name"/>
                                                     </textField>
@@ -315,36 +323,39 @@
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="400" id="15W-Rs-EAW"/>
                                         </constraints>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jpJ-Iu-rVO">
-                                            <size key="itemSize" width="160" height="160"/>
+                                            <size key="itemSize" width="132" height="160"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GalleryCell" id="GVK-Ug-QA0" customClass="GalleryCell" customModule="Records" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="132" height="160"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ziq-kr-pfO">
-                                                    <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="132" height="160"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M73-M2-nEF">
-                                                            <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="132" height="160"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gVA-FK-2IV">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="132" height="160"/>
                                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <state key="normal" title="Button"/>
                                                                     <buttonConfiguration key="configuration" style="plain" image="plus" catalog="system"/>
                                                                 </button>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ObL-wz-8Ng">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ObL-wz-8Ng">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="132" height="160"/>
                                                                 </imageView>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gEm-fu-10n">
-                                                                    <rect key="frame" x="102.33333333333333" y="8" width="49.666666666666671" height="34.333333333333336"/>
+                                                                    <rect key="frame" x="74.333333333333329" y="8" width="49.666666666666671" height="34.333333333333336"/>
                                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <state key="normal" title="Button"/>
                                                                     <buttonConfiguration key="configuration" style="plain" image="xmark.circle" catalog="system"/>
+                                                                    <connections>
+                                                                        <action selector="onDelete:" destination="GVK-Ug-QA0" eventType="touchUpInside" id="6Hc-3D-gwa"/>
+                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -355,7 +366,7 @@
                                                                 <constraint firstItem="gEm-fu-10n" firstAttribute="top" secondItem="M73-M2-nEF" secondAttribute="top" constant="8" id="Vsl-NL-jsA"/>
                                                                 <constraint firstItem="ObL-wz-8Ng" firstAttribute="leading" secondItem="M73-M2-nEF" secondAttribute="leading" id="aRw-gV-e7l"/>
                                                                 <constraint firstAttribute="bottom" secondItem="ObL-wz-8Ng" secondAttribute="bottom" id="cJh-sl-kgb"/>
-                                                                <constraint firstAttribute="width" constant="160" id="gHG-X2-egX"/>
+                                                                <constraint firstAttribute="width" constant="132" id="gHG-X2-egX"/>
                                                                 <constraint firstItem="gVA-FK-2IV" firstAttribute="top" secondItem="M73-M2-nEF" secondAttribute="top" id="keN-2T-RuE"/>
                                                                 <constraint firstItem="ObL-wz-8Ng" firstAttribute="top" secondItem="M73-M2-nEF" secondAttribute="top" id="qc3-EE-itK"/>
                                                                 <constraint firstAttribute="trailing" secondItem="ObL-wz-8Ng" secondAttribute="trailing" id="soW-9U-vut"/>
@@ -371,7 +382,7 @@
                                                         <constraint firstAttribute="trailing" secondItem="M73-M2-nEF" secondAttribute="trailing" id="vCo-5u-4eI"/>
                                                     </constraints>
                                                 </collectionViewCellContentView>
-                                                <size key="customSize" width="160" height="160"/>
+                                                <size key="customSize" width="132" height="160"/>
                                                 <connections>
                                                     <outlet property="addImageView" destination="gVA-FK-2IV" id="trx-8o-WOi"/>
                                                     <outlet property="closeButtonView" destination="gEm-fu-10n" id="utF-2q-5ZD"/>
@@ -380,11 +391,33 @@
                                             </collectionViewCell>
                                         </cells>
                                     </collectionView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bbm-id-UiA">
+                                        <rect key="frame" x="20" y="575" width="353" height="50"/>
+                                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="shi-Aj-96D"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Submit"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="12"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="onSubmit:" destination="3It-Iw-Ha1" eventType="touchUpInside" id="VAW-mK-vEE"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="Bbm-id-UiA" firstAttribute="centerX" secondItem="CEv-2v-m4W" secondAttribute="centerX" id="5bG-j8-GNp"/>
                                     <constraint firstItem="VcY-cs-6GR" firstAttribute="trailing" secondItem="1AK-YH-mGP" secondAttribute="trailing" id="9pv-GU-YO1"/>
+                                    <constraint firstItem="Bbm-id-UiA" firstAttribute="leading" secondItem="VcY-cs-6GR" secondAttribute="leading" constant="20" id="Dkk-TF-loB"/>
                                     <constraint firstItem="DA7-kN-Req" firstAttribute="top" secondItem="CEv-2v-m4W" secondAttribute="top" constant="18" id="HdI-6G-b5Q"/>
+                                    <constraint firstItem="VcY-cs-6GR" firstAttribute="trailing" secondItem="Bbm-id-UiA" secondAttribute="trailing" constant="20" id="WBe-7t-i3H"/>
                                     <constraint firstItem="DA7-kN-Req" firstAttribute="centerX" secondItem="CEv-2v-m4W" secondAttribute="centerX" id="WXd-Qh-6Ek"/>
                                     <constraint firstAttribute="trailing" secondItem="DA7-kN-Req" secondAttribute="trailing" constant="16" id="cnV-Fl-Y5f"/>
                                     <constraint firstItem="1AK-YH-mGP" firstAttribute="leading" secondItem="VcY-cs-6GR" secondAttribute="leading" id="g4P-R9-8Av"/>
@@ -400,6 +433,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="CEv-2v-m4W" firstAttribute="top" secondItem="YgA-Xt-NhV" secondAttribute="top" id="E9T-RZ-eZ3"/>
+                            <constraint firstItem="3dS-zx-McO" firstAttribute="bottom" secondItem="Bbm-id-UiA" secondAttribute="bottom" constant="38" id="FHZ-7D-cXz"/>
                             <constraint firstItem="CEv-2v-m4W" firstAttribute="trailing" secondItem="YgA-Xt-NhV" secondAttribute="trailing" id="iMD-vd-Dcj"/>
                             <constraint firstItem="CEv-2v-m4W" firstAttribute="leading" secondItem="YgA-Xt-NhV" secondAttribute="leading" id="lwX-AJ-1s9"/>
                             <constraint firstAttribute="bottom" secondItem="CEv-2v-m4W" secondAttribute="bottom" id="mqb-bf-cPq"/>
@@ -408,6 +442,7 @@
                     <navigationItem key="navigationItem" title="Register User " largeTitleDisplayMode="always" id="h6k-wK-Y9O"/>
                     <connections>
                         <outlet property="galleryCollectionView" destination="1AK-YH-mGP" id="ILa-Re-FNc"/>
+                        <outlet property="submitStyle" destination="Bbm-id-UiA" id="aa1-rI-gnW"/>
                         <outlet property="userAge" destination="1bz-aC-eP5" id="ByF-za-I0t"/>
                         <outlet property="userDOB" destination="lmu-qB-M4T" id="4Ov-Wg-I04"/>
                         <outlet property="userDepartment" destination="gmo-ra-FIM" id="Qbx-iG-X4D"/>
@@ -461,6 +496,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tertiarySystemGroupedBackgroundColor">
             <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

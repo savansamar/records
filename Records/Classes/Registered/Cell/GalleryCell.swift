@@ -17,14 +17,13 @@ class GalleryCell: UICollectionViewCell {
     @IBOutlet weak var closeButtonView: UIButton!
     
     
-    @IBAction func onAddImage(_ sender: UIButton) {
+   
+    
+    @IBAction func onDelete(_ sender: Any) {
+        print("Sseeeee")
+        delegate?.didTapClose(in:self)
     }
     
-    @IBAction func onTapClose(_ sender: UIButton) {
-        delegate?.didTapClose(in: self)
-    }
-    
-
     override public func layoutSubviews() {
         super.layoutSubviews()
         super.layoutIfNeeded()

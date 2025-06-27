@@ -54,21 +54,10 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fe1-ys-KWt">
-                                                            <rect key="frame" x="321.66666666666669" y="23.000000000000004" width="51.333333333333314" height="34.333333333333343"/>
-                                                            <color key="tintColor" systemColor="labelColor"/>
-                                                            <state key="normal" title="Button"/>
-                                                            <buttonConfiguration key="configuration" style="plain" image="gear" catalog="system"/>
-                                                            <connections>
-                                                                <action selector="onSelect:" destination="X5E-CA-0v9" eventType="touchUpInside" id="nm3-v2-TTL"/>
-                                                            </connections>
-                                                        </button>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="fe1-ys-KWt" firstAttribute="centerY" secondItem="yNI-Qx-Rl8" secondAttribute="centerY" id="7Vy-36-TPx"/>
                                                         <constraint firstItem="hZl-8k-inP" firstAttribute="leading" secondItem="yNI-Qx-Rl8" secondAttribute="leadingMargin" constant="16" id="RD2-mR-IwJ"/>
                                                         <constraint firstItem="dQB-St-61W" firstAttribute="leading" secondItem="yNI-Qx-Rl8" secondAttribute="leadingMargin" constant="16" id="SE2-F6-V0O"/>
-                                                        <constraint firstItem="fe1-ys-KWt" firstAttribute="trailing" secondItem="yNI-Qx-Rl8" secondAttribute="trailingMargin" id="h7x-3K-k9d"/>
                                                         <constraint firstItem="hZl-8k-inP" firstAttribute="top" secondItem="yNI-Qx-Rl8" secondAttribute="topMargin" constant="6" id="loj-eV-E0O"/>
                                                         <constraint firstItem="dQB-St-61W" firstAttribute="top" secondItem="hZl-8k-inP" secondAttribute="bottom" constant="6" id="qG1-Rs-SnC"/>
                                                     </constraints>
@@ -486,14 +475,10 @@
         <image name="building.columns" catalog="system" width="128" height="112"/>
         <image name="calendar" catalog="system" width="128" height="107"/>
         <image name="envelope" catalog="system" width="128" height="85"/>
-        <image name="gear" catalog="system" width="128" height="122"/>
         <image name="numbers.rectangle" catalog="system" width="128" height="93"/>
         <image name="person" catalog="system" width="128" height="121"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="xmark.circle" catalog="system" width="128" height="123"/>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

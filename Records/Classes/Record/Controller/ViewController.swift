@@ -115,11 +115,11 @@ extension ViewController: UITableViewDelegate,UITableViewDataSource {
             cell.configure(with: user)
              return cell
      }
+    
 
      func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
          return viewModel.sortedDepartments[section]
      }
-     
      
      
      func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle,forRowAt indexPath: IndexPath) {
